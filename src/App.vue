@@ -1,13 +1,15 @@
 <template>
     <div class="container">
       <app-new-quote @addQuote="newQuote"></app-new-quote> <!-- 8/25 5.bind NewQuotes methods-->
-      <app-quote-grid :quotes="quotes"></app-quote-grid>
+      <app-quote-grid :quotes="quotes" @quoteDeleted="delQuote"></app-quote-grid>
       <!-- 8/25 7.Add delete button -->
-      <!-- <div class="row">
-        <div class="col-sm-12">
-
+      <div class="row">
+        <div class="col-sm-12 text-center" >
+          <div class="alert alert-info">
+            提示：點擊記事即可刪除
+          </div>
         </div>
-      </div> -->
+      </div>
     </div>
 </template>
 
@@ -28,6 +30,9 @@
           // 8/25 6. newQuote methods，新增quote至quotes
           newQuote (quote) {
             this.quotes.push(quote)
+          },
+          delQuote (index) {
+            this.quotes.splice(index, 1)
           }
         },
         components: {
