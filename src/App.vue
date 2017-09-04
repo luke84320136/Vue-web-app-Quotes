@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <app-header></app-header>
+      <app-header :quoteCount="quotes.length" :maxQuotes="maxQuotes"></app-header>
       <app-new-quote @addQuote="newQuote"></app-new-quote> <!-- 8/25 5.bind NewQuotes methods-->
       <app-quote-grid :quotes="quotes" @quoteDeleted="delQuote"></app-quote-grid>
       <!-- 8/25 7.Add delete button -->
@@ -31,6 +31,9 @@
         methods: {
           // 8/25 6. newQuote methods，新增quote至quotes
           newQuote (quote) {
+            if (this.quotes.length >= this.maxQuotes) {
+              return alert ('請先刪除多餘的記事！')
+            }
             this.quotes.push(quote)
           },
           delQuote (index) {
